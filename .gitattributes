@@ -1,0 +1,25 @@
+# Normaliza fim de linha: LF no repositório e na árvore de trabalho.
+* text=auto eol=lf
+
+# Scripts que exigem CRLF na plataforma Windows.
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Scripts que exigem LF.
+*.sh text eol=lf
+
+# Binários: nunca normalizar nem tentar diff.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ogg binary
+*.wav binary
+*.mp3 binary
+*.ttf binary
+*.otf binary
+*.a binary
+*.lib binary
+*.dll binary
+*.wasm binary

@@ -1,0 +1,30 @@
+# Build
+build/
+bin/
+dist/
+
+# Binários e artefatos de compilação
+*.exe
+*.pdb
+*.o
+*.obj
+*.ilk
+
+# IDE / Editor
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Configuração pessoal do Claude Code
+.claude/settings.local.json
+CLAUDE.local.md
