@@ -53,14 +53,25 @@ trade-offs antes de escolher.
 Antes de propor mudanças:
 
 - leia o `README.md` da raiz;
+- leia `docs/concept.md` antes de propor qualquer coisa de design ou
+  gameplay — é a ideia central do jogo;
 - se estiver em uma demanda de `work/`, leia primeiro o brief dela;
-- consulte `docs/` quando a tarefa depender de conhecimento permanente;
+- consulte o restante de `docs/` quando a tarefa depender de
+  conhecimento permanente;
 - leia apenas o que a tarefa atual exige.
 
 O trabalho é organizado em demandas, geridas pela skill `game-work`.
 Quando uma conversa começar a formar algo que é uma demanda, ofereça criar
 o rascunho com `/game-work new`: conversa que não chega ao brief não
 sobrevive à troca de sessão, de máquina ou de contexto.
+
+A ideia central do jogo (`docs/concept.md`) é semeada e mantida pela
+skill `game-init`, não pela `game-work`.
+
+Se `docs/concept.md` ainda não existir, é sinal de clone novo do
+template: sugira `/game-init` (semear a ideia do jogo) e `/setup check`
+(ver o que falta na máquina) como os dois primeiros passos lógicos —
+não dependem um do outro para rodar.
 
 ## Documentação
 

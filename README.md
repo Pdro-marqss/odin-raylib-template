@@ -5,6 +5,16 @@ com o Claude Code como copiloto e mentor.
 
 Plataformas alvo: Windows, Linux, macOS e Web/WebAssembly.
 
+## Ideia do jogo
+
+Nome, pitch, estilo e mecânicas centrais vivem em `docs/concept.md`,
+semeado e mantido pela skill `game-init` (`/game-init`).
+
+## Ambiente de desenvolvimento
+
+`/setup check` mostra o que falta da toolchain (Odin, linker,
+Emscripten, OLS); `/setup install` instala o que faltar.
+
 ## Estrutura
 
 ```text
@@ -42,10 +52,12 @@ A definir.
 
 Use o botão **Use this template** no GitHub para gerar um repositório novo.
 
-No repositório gerado:
+No repositório gerado, rode `/game-init`: ele entrevista você sobre a
+ideia do jogo, preenche `docs/concept.md`, atualiza o título e a
+descrição deste README com a identidade do jogo, e limpa `work/` e
+`docs/` dos exemplos do template.
 
-1. `README.md` — substitua título, descrição e a seção Build pelos do jogo;
-2. `work/*/` — apague as demandas, mantendo as pastas de tipo;
-3. `docs/` — apague os documentos e limpe a tabela do `docs/README.md`.
+A seção Build não é tocada pelo `/game-init` — ela é definida por uma
+demanda própria de toolchain.
 
 Não mexa em `.claude/` nem no `CLAUDE.md`: são o fluxo, não o jogo.

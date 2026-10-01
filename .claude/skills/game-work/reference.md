@@ -176,7 +176,9 @@ Ao fechar uma demanda, avalie se ela produziu conhecimento permanente:
 - uma decisão arquitetural;
 - uma regra de gameplay;
 - um valor afinado e o motivo dele;
-- uma solução técnica importante.
+- uma solução técnica importante;
+- uma mudança na ideia central do jogo (mecânica central, escopo ou
+  nome) — atualize `docs/concept.md` e seu `Atualizado em`.
 
 Quando houver conhecimento permanente:
 
