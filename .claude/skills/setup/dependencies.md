@@ -1,8 +1,13 @@
 # Dependências
 
-Define o que cada dependência é, para quê serve, como detectar e como
-instalar. Usado por `check.md` e `install.md` — não duplique esta
-informação neles.
+Define o que cada dependência é, para quê serve, como detectar, como
+instalar e como descobrir sua versão. Usado por `check.md`,
+`install.md` e `update.md` — não duplique esta informação neles.
+
+Linhas marcadas como **testado empiricamente** foram verificadas numa
+máquina real, na data indicada. Linhas marcadas como **não testado**
+são o caminho documentado pelo projeto upstream, ainda sem verificação
+nossa — trate-as como hipótese a confirmar na primeira execução.
 
 ## Odin
 
@@ -12,15 +17,71 @@ informação neles.
 - **No alvo web:** confirme que `vendor/raylib/wasm/` tem os binários
   da Raylib (`libraylib.a` ou `libraylib.web.a`, e `libraygui.a`) com
   tamanho de binário real — não um ponteiro de Git LFS nem pasta vazia.
-  O nome exato varia por versão do Odin (testado empiricamente em
-  2026-10-01 numa instalação `dev-2026-03`: são `libraylib.a` e
-  `libraygui.a`, ~1.3 MB e ~188 KB) — verifique pela existência e
-  tamanho, não por um nome fixo. Pacotes de terceiros (Homebrew,
+  O nome exato varia por versão do Odin — verifique pela existência e
+  tamanho, não por um nome fixo. Dois pontos de dado, ambos testados
+  empiricamente: em `dev-2026-03` (2026-10-01) eram `libraylib.a` e
+  `libraygui.a`, ~1.3 MB e ~188 KB; em `dev-2026-09` (2026-10-03) são
+  `libraylib.web.a` (1.360.242 bytes) e `libraygui.a` (188.456 bytes) —
+  o nome do primeiro mudou entre as duas versões. Pacotes de terceiros (Homebrew,
   algumas distros Linux) já distribuíram isso quebrado; a distribuição
   oficial não tem esse problema.
 - **Instalar:** baixar a distribuição oficial em
   https://odin-lang.org/docs/install/ (não um pacote de terceiros) e
   adicionar ao PATH.
+- **Onde a instalação vive:** resolva o diretório pelo `odin` do PATH,
+  não por um caminho fixo. `ODIN_ROOT` pode não estar definido no
+  ambiente (testado empiricamente em 2026-10-03: não estava, e o Odin
+  funcionava normalmente pelo PATH).
+- **Forma da instalação:** a pasta tem `.git/` → é um clone da fonte,
+  compilado localmente; não tem → é uma release extraída. A forma
+  suportada é a release; o clone é uma divergência a migrar. Distinga
+  antes de qualquer atualização — as duas leem a versão instalada de
+  formas diferentes (testado empiricamente em 2026-10-03).
+- **Versão instalada:** numa release, `odin version` reporta a tag da
+  release e basta. Num clone compilado da fonte, `odin version` reporta
+  a última tag alcançada e **esconde os commits depois dela** — ali a
+  leitura confiável é `git describe --tags` no diretório da instalação
+  (testado empiricamente em 2026-10-03: `odin version` dizia
+  `dev-2026-03:44b50eab9` enquanto `git describe --tags` dizia
+  `dev-2026-03-228-g44b50eab9`, 228 commits de diferença).
+- **Comparar instalada com disponível: normalize antes.** O binário de
+  uma release reporta um sufixo que a tag não tem — a tag `dev-2026-09`
+  instalada reporta `dev-2026-09-nightly:a2fb372` (testado
+  empiricamente em 2026-10-03). Comparar as strings inteiras daria
+  "desatualizado" para sempre. Compare só o prefixo `dev-AAAA-MM`.
+- **Versão disponível:** peça o redirect de
+  https://github.com/odin-lang/Odin/releases/latest — o cabeçalho
+  `Location` da resposta 302 termina na tag da última release. Não use
+  `api.github.com`: nesta máquina ele estava inalcançável na porta 443
+  enquanto `github.com`, `raw.githubusercontent.com` e
+  `objects.githubusercontent.com` respondiam normalmente (testado
+  empiricamente em 2026-10-03). O caminho do redirect não depende da
+  API e é mais barato.
+- **Qual arquivo baixar:** o padrão dos assets é
+  `odin-<os>-<arch>-<tag>`, com `.zip` no Windows e `.tar.gz` no Linux e
+  macOS — ex.: `odin-windows-amd64-dev-2026-09.zip` (testado
+  empiricamente em 2026-10-03; a lista completa da release trazia
+  `windows-amd64`, `linux-amd64`, `linux-arm64`, `macos-amd64` e
+  `macos-arm64`). A lista de uma release está em
+  `https://github.com/odin-lang/Odin/releases/expanded_assets/<tag>`.
+  - **Armadilha:** a release também traz `<tag>.zip` e `<tag>.tar.gz`,
+    que são os arquivos de código-fonte gerados pelo GitHub, não o
+    compilador compilado. Selecione pelo prefixo
+    `odin-<os>-<arch>-`, nunca só pela extensão.
+- **Layout interno do zip:** tudo vem dentro de uma pasta de topo
+  `dist/` — não na raiz do arquivo (testado empiricamente em 2026-10-03
+  no `odin-windows-amd64-dev-2026-09.zip`, 148 MB, 2270 entradas, todas
+  sob `dist/`). O que vira o diretório de instalação é o **conteúdo** de
+  `dist/`, não a pasta `dist/` em si.
+- **Atualizar:** renomeie a instalação atual (ex.:
+  `<dir>.bak-<versão antiga>`), extraia a release nova no caminho
+  original e preserve o backup até o dev confirmar que o jogo compila.
+  Manter o caminho original é o que dispensa mexer no PATH.
+  - O `ols.exe` pode viver dentro da pasta do Odin e ser o OLS que o
+    PATH resolve (testado empiricamente em 2026-10-03). Nesse caso a
+    troca o remove do PATH: deixe a extensão `DanielGavin.ols` baixar o
+    binário dela de novo e confirme o autocomplete, em vez de copiar o
+    binário antigo de volta — ele foi compilado contra a versão antiga.
 
 ## Linker
 
@@ -77,6 +138,21 @@ Fontes: [FAQ oficial do Odin](https://odin-lang.org/docs/faq/),
   `emsdk activate latest --permanent` (grava `PATH`/`EMSDK` no registro
   do usuário, no Windows).
 - Passa de 1 GB — avise o dev antes de rodar.
+- **Versão instalada:** `emcc --version`, ou
+  `upstream/emscripten/emscripten-version.txt` dentro do diretório do
+  `emsdk` quando o `emcc` não estiver no PATH desta sessão (testado
+  empiricamente em 2026-10-03: o arquivo continha `"6.0.10"`).
+- **Atualizar: não coberto por `/setup update`.** Quem atualiza é o
+  próprio `emsdk` — `emsdk install latest` seguido de `emsdk activate
+  latest --permanent` (o `emsdk` é um clone git, então um `git pull`
+  nele antes atualiza a lista de versões disponíveis). Isso fica como
+  referência, **não testado por nós**: o `activate --permanent`
+  reescreve o `PATH` no registro do usuário, e não houve máquina onde
+  validar isso sem arriscar um `PATH` de trabalho. Os hosts que o
+  `emsdk` usa (`storage.googleapis.com`, `raw.githubusercontent.com`,
+  `registry.npmjs.org`) estavam alcançáveis em 2026-10-03.
+- Depois de um update, a nota abaixo sobre propagação do `PATH` no
+  Windows vale igual à da instalação inicial.
 - **Windows — `PATH` permanente só aparece em terminais abertos *depois*
   da instalação** (confirmado empiricamente em 2026-10-01): o `emsdk
   activate --permanent` grava corretamente no registro

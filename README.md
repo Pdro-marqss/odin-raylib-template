@@ -13,7 +13,8 @@ semeado e mantido pela skill `game-init` (`/game-init`).
 ## Ambiente de desenvolvimento
 
 `/setup check` mostra o que falta da toolchain (Odin, linker,
-Emscripten, OLS); `/setup install` instala o que faltar.
+Emscripten, OLS); `/setup install` instala o que faltar; `/setup update
+odin` atualiza o Odin para a release mais recente.
 
 ## Estrutura
 

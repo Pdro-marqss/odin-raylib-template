@@ -1,8 +1,8 @@
 ---
 name: setup
-description: Verifica e instala a toolchain de desenvolvimento (Odin, linker, Emscripten, OLS) no sistema.
+description: Verifica, instala e atualiza a toolchain de desenvolvimento (Odin, linker, Emscripten, OLS) no sistema.
 disable-model-invocation: true
-argument-hint: "check | install"
+argument-hint: "check | install | update odin"
 ---
 
 # Setup
@@ -17,16 +17,21 @@ jogo: Odin, o linker da plataforma, Emscripten (build web) e o OLS
 |---|---|---|
 | `check` | Verifica o que está instalado e o que falta | `check.md` |
 | `install` | Instala e configura o que falta | `install.md` |
+| `update` | Atualiza uma dependência (hoje só o Odin) | `update.md` |
 
-Leia somente o arquivo da operação solicitada. Ambas leem
+Leia somente o arquivo da operação solicitada. As três leem
 `dependencies.md` — a lista de dependências, para quê servem, e como
-detectar e instalar cada uma por plataforma.
+detectar, instalar e descobrir a versão de cada uma por plataforma.
 
 ## Relação entre as operações
 
-`check` e `install` são operações irmãs, não uma aninhada na outra —
-`check` é a de uso frequente e não deve ficar escondida atrás do
+`check`, `install` e `update` são operações irmãs, nenhuma aninhada na
+outra — `check` é a de uso frequente e não deve ficar escondida atrás do
 `install`.
+
+`update` age numa dependência nomeada por vez (`/setup update odin`), e
+não em tudo de uma vez: atualizar a toolchain inteira num comando só
+junta riscos independentes numa única aprovação.
 
 `check` vem primeiro: é determinística, barata, e resolve sozinha o
 caso mais comum (saber o que falta num PC novo). `install` reaproveita
