@@ -96,7 +96,7 @@ prontos para autorar.
 
 ## Ciclo de vida
 
-Uma demanda passa por três estados:
+Uma demanda passa por três status:
 
 1. **rascunho**
    - A ideia está sendo formada.
@@ -112,7 +112,7 @@ Uma demanda passa por três estados:
    - O conhecimento que continua válido foi promovido para `docs/`.
 
 Uma demanda interrompida continua em `execução`. O que permite retomá-la
-é o `Próximo passo` do brief, não um estado separado.
+é o `Próximo passo` do brief, não um status separado.
 
 A demanda concluída permanece em `work/` como histórico e não é
 reaberta: ela pode ter originado documentação permanente, e continuar

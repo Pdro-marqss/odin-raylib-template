@@ -17,7 +17,7 @@ Gerencia o ciclo de vida de uma demanda em `work/`.
 | `start` | Inicia uma demanda | `start.md` | não |
 | `resume` | Retoma uma demanda | `resume.md` | só se for rascunho |
 | `close` | Conclui uma demanda | `close.md` | sim |
-| `list` | Lista as demandas e seus estados | `list.md` | não |
+| `list` | Lista as demandas e seus status | `list.md` | não |
 
 Leia somente o arquivo da operação solicitada.
 
@@ -26,11 +26,11 @@ lido quando a operação exige julgamento: escolher o tipo de uma demanda
 nova, continuar formando um rascunho, ou decidir o que promover para
 `docs/`.
 
-## Tipos e estados
+## Tipos e status
 
 Tipos: `features`, `improvements`, `bugs`, `experiments`, `refactors`.
 
-Estados: `rascunho`, `execução`, `concluída`.
+Status: `rascunho`, `execução`, `concluída`.
 
 As definições estão em `reference.md`.
 

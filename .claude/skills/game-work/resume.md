@@ -27,7 +27,7 @@ Recupere o contexto de uma demanda de `work/` e continue de onde parou.
 
 Informe:
 
-- qual demanda foi retomada e em que estado;
+- qual demanda foi retomada e com que status;
 - o próximo passo;
 - decisões e perguntas em aberto que sejam relevantes.
 

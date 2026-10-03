@@ -1,6 +1,6 @@
 # Nova demanda
 
-Crie uma nova demanda em `work/`, em estado de rascunho.
+Crie uma nova demanda em `work/`, com status `rascunho`.
 
 ## Entrada
 

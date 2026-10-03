@@ -39,7 +39,7 @@ rascunho ao fechamento, geridas pela skill `game-work`.
 | `/game-work start <nome>` | coloca em execução |
 | `/game-work resume <nome>` | retoma de onde parou |
 | `/game-work close <nome>` | conclui e promove o que é permanente |
-| `/game-work list` | mostra as demandas e seus estados |
+| `/game-work list` | mostra as demandas e seus status |
 
 O modelo completo está em `.claude/skills/game-work/reference.md`, e as
 regras de comportamento do Claude no `CLAUDE.md`.

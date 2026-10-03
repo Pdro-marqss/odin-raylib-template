@@ -10,7 +10,7 @@ As pastas de primeiro nível são os tipos de demanda: `features`,
 `improvements`, `bugs`, `experiments`, `refactors`. As definições estão em
 `.claude/skills/game-work/reference.md`.
 
-Para ver o que existe e em que estado: `/game-work list`.
+Para ver o que existe e com que status: `/game-work list`.
 
 Demandas concluídas permanecem aqui como histórico e não são reabertas.
 Trabalho novo sobre o mesmo assunto é uma demanda nova, que referencia a
