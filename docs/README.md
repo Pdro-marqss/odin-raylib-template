@@ -12,10 +12,9 @@ ideia evolui.
 
 | Assunto | Descrição | Documento |
 |---|---|---|
+| Plataformas | Como o jogo é construído para cada plataforma e o que o alvo web exige do código | [platforms.md](platforms.md) |
 
-Ainda não há documentação permanente. Ela nasce do fechamento de demandas
-(com a exceção de `concept.md` acima), e cada documento criado ganha uma
-linha nesta tabela.
+Cada documento criado ganha uma linha nesta tabela.
 
 Quando o número de documentos justificar, agrupe a tabela em seções — não
 antes.

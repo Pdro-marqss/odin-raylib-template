@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <title>game</title>
+    <meta name="viewport" content="width=device-width">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+
+        canvas.game_canvas {
+            border: 0 none;
+            background-color: black;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas class="game_canvas" id="canvas" oncontextmenu="event.preventDefault()" tabindex="-1"
+        onmousedown="event.target.focus()" onkeydown="event.preventDefault()"></canvas>
+
+    <!-- Runtime do Odin: copiado de <odin root>/core/sys/wasm/js/odin.js
+           pelo tools/build.odin. E ele que fornece o modulo `odin_env`. -->
+    <script type="text/javascript" src="odin.js"></script>
+    <script>
+        // Adaptado do index_template.html de karl-zylinski/odin-raylib-web
+        // (licenca zlib, Copyright (c) 2025-2026 Karl Zylinski).
+        // Versao alterada para este projeto; nao e o original.
+        var odinMemoryInterface = new odin.WasmMemoryInterface();
+        odinMemoryInterface.setIntSize(4);
+        var odinImports = odin.setupDefaultImports(odinMemoryInterface);
+
+        var Module = {
+            instantiateWasm: (imports, successCallback) => {
+                const newImports = { ...odinImports, ...imports };
+                return WebAssembly.instantiateStreaming(fetch("index.wasm"), newImports)
+                    .then(function (output) {
+                        var e = output.instance.exports;
+                        odinMemoryInterface.setExports(e);
+                        odinMemoryInterface.setMemory(e.memory);
+                        return successCallback(output.instance);
+                    });
+            },
+            onRuntimeInitialized: () => {
+                var e = wasmExports;
+                e._start();        // procs marcados com @init
+                e.main_start();
+
+                function send_resize() {
+                    var canvas = document.getElementById('canvas');
+                    e.web_window_size_changed(canvas.width, canvas.height);
+                }
+                window.addEventListener('resize', send_resize, true);
+                send_resize();
+
+                function do_main_update() {
+                    if (!e.main_update()) {
+                        e.main_end();
+                        e._end();  // procs marcados com @fini
+                        return;
+                    }
+                    window.requestAnimationFrame(do_main_update);
+                }
+                window.requestAnimationFrame(do_main_update);
+            },
+            print: function (text) { console.log(text); },
+            canvas: document.getElementById("canvas"),
+        };
+    </script>
+
+    {{{ SCRIPT }}}
+</body>
+
+</html>

@@ -20,10 +20,8 @@ odin` atualiza o Odin para a release mais recente.
 
 ```text
 src/          código do jogo
-shaders/      shaders
-assets/       imagens, áudio, fontes
-scripts/      build e toolchain
-third_party/  dependências externas
+assets/       imagens, áudio, fontes, shaders
+tools/        ferramentas de build do workspace
 docs/         como o jogo funciona (permanente)
 work/         demandas em andamento (temporário)
 .claude/      configuração e skills do Claude Code
@@ -47,7 +45,21 @@ regras de comportamento do Claude no `CLAUDE.md`.
 
 ## Build
 
-A definir.
+Quatro alvos, um comando cada, rodados da raiz do projeto:
+
+```text
+odin run tools/build.odin -file -- debug      build/debug/
+odin run tools/build.odin -file -- release    build/release/
+odin run tools/build.odin -file -- web        build/web/
+odin run tools/build.odin -file -- run        compila e executa
+```
+
+As mesmas quatro estão como tasks do VS Code (`Ctrl+Shift+B` roda o
+`debug`), e o `F5` compila e anexa o depurador.
+
+O alvo web impõe um formato ao código de `src/`: sem loop bloqueante, e
+algumas chamadas da raylib indisponíveis. Veja
+[`docs/platforms.md`](docs/platforms.md).
 
 ## Começar um jogo a partir deste template
 

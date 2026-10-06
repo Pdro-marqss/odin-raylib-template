@@ -29,10 +29,13 @@ Quando uma implementação for necessária:
 
 | Caminho | Quem escreve |
 |---|---|
-| `src/`, `shaders/`, `assets/` | apenas o desenvolvedor |
+| `src/`, `assets/`, `tools/`, `web/`, `.vscode/` | apenas o desenvolvedor |
 | `docs/`, `work/`, `.claude/`, `README.md`, `CLAUDE.md` | o Claude pode |
 
-Build e toolchain ainda não têm regra definida.
+O build do jogo vive em `tools/build.odin` e é exposto pelas tasks de
+`.vscode/`. As restrições de cada plataforma — principalmente o que o
+alvo web exige do código de `src/` — estão em `docs/platforms.md`.
+Leia esse documento antes de mexer em build ou em entry point.
 
 ## Desenvolvimento
 

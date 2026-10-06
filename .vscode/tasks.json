@@ -1,0 +1,88 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "debug",
+            "detail": "Compila com simbolos de debug em build/debug/",
+            "type": "shell",
+            "command": "odin run tools/build.odin -file -- debug",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "odin",
+                "source": "odin",
+                "severity": "error",
+                "fileLocation": "autoDetect",
+                "pattern": {
+                    "regexp": "^(.+?)\\((\\d+):(\\d+)\\)\\s+(?:Syntax )?Error:\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "release",
+            "detail": "Compila otimizado em build/release/",
+            "type": "shell",
+            "command": "odin run tools/build.odin -file -- release",
+            "group": "build",
+            "problemMatcher": {
+                "owner": "odin",
+                "source": "odin",
+                "severity": "error",
+                "fileLocation": "autoDetect",
+                "pattern": {
+                    "regexp": "^(.+?)\\((\\d+):(\\d+)\\)\\s+(?:Syntax )?Error:\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "web",
+            "detail": "Gera o bundle WebAssembly em build/web/",
+            "type": "shell",
+            "command": "odin run tools/build.odin -file -- web",
+            "group": "build",
+            "problemMatcher": {
+                "owner": "odin",
+                "source": "odin",
+                "severity": "error",
+                "fileLocation": "autoDetect",
+                "pattern": {
+                    "regexp": "^(.+?)\\((\\d+):(\\d+)\\)\\s+(?:Syntax )?Error:\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }
+        },
+        {
+            "label": "run",
+            "detail": "Compila release e executa o jogo",
+            "type": "shell",
+            "command": "odin run tools/build.odin -file -- run",
+            "group": "build",
+            "problemMatcher": {
+                "owner": "odin",
+                "source": "odin",
+                "severity": "error",
+                "fileLocation": "autoDetect",
+                "pattern": {
+                    "regexp": "^(.+?)\\((\\d+):(\\d+)\\)\\s+(?:Syntax )?Error:\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }
+        }
+    ]
+}
